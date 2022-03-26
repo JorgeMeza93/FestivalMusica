@@ -1,5 +1,6 @@
 const {src, dest, watch, parallel} = require("gulp");
 const sass = require("gulp-sass")(require("sass"));
+const cssnano = require("gulp-cssnano");
 
 //Imágenes
 const webp = require('gulp-webp');
@@ -8,6 +9,7 @@ function css( done ){
 
     src('src/scss/**/*.scss') // Identificar el archivo .SCSS a compilar
         .pipe( sass() ) //Compilar el archivo scss a css
+        .pipe( cssnano() ) //Minifica la
         .pipe( dest("build/css") );  //Almacenarlo
     done();
 }
