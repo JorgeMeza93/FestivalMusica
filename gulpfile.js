@@ -1,6 +1,8 @@
 const {src, dest, watch, parallel} = require("gulp");
 const sass = require("gulp-sass")(require("sass"));
 const cssnano = require("gulp-cssnano");
+const sourcemaps = require('gulp-sourcemaps'); 
+const terser = require('gulp-terser-js');
 
 //Imágenes
 const webp = require('gulp-webp');
@@ -24,6 +26,9 @@ function versionWebp(done){
 }
 function javascript(done){
     src('src/js/**/*.js')
+        .pipe( sourcemaps.init() )
+        .pipe( terser() )
+        .pipe( sourcemaps.write('.'))
         .pipe(dest('build/js'));
     done();
 }
